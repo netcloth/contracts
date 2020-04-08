@@ -45,16 +45,16 @@ contract StandardToken is SafeMath  {
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 
     constructor(
-        uint256 initialSupply,
-        string memory tokenName,
-        uint8 decimalUnits,
-        string memory tokenSymbol
+        uint256 _initialSupply,
+        string memory _name,
+        uint8 _decimals,
+        string memory _symbol
     ) public {
-        balances[msg.sender] = initialSupply;
-        totalSupply = initialSupply;
-        name = tokenName;
-        decimals = decimalUnits;
-        symbol = tokenSymbol;
+        balances[msg.sender] = _initialSupply;
+        totalSupply = _initialSupply;
+        name = _name;
+        decimals = _decimals;
+        symbol = _symbol;
     }
 
     function balanceOf(address _owner) view public returns (uint256 balance) {
@@ -73,9 +73,7 @@ contract StandardToken is SafeMath  {
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        //same as above. Replace this line with the following if you want to protect against wrapping uints.
         if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
-            //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && _value > 0) {
             balances[_to] += _value;
             balances[_from] -= _value;
             allowed[_from][msg.sender] -= _value;
