@@ -39,7 +39,7 @@ contract StandardToken is SafeMath  {
     /* This creates an array with all balances */
     mapping(address => uint256) balances;
     mapping (address => mapping (address => uint256)) allowed;
-    
+
     /* This generates a public event on the blockchain that will notify clients */
     event Transfer(address indexed _from, address indexed _to, uint256 _value);
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
@@ -64,10 +64,10 @@ contract StandardToken is SafeMath  {
     function transfer(address _to, uint256 _value) public returns (bool success) {
         if (balances[msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
             balances[msg.sender] = SafeMath.safeSub(balances[msg.sender], _value);
-            balances[_to] = SafeMath.safeAdd(balances[_to], _value); 
+            balances[_to] = SafeMath.safeAdd(balances[_to], _value);
             emit Transfer(msg.sender, _to, _value);
             return true;
-        } else { 
+        } else {
             return false;
         }
     }
@@ -81,7 +81,7 @@ contract StandardToken is SafeMath  {
             return true;
         } else {
             return false;
-        }  
+        }
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
@@ -90,7 +90,7 @@ contract StandardToken is SafeMath  {
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
-    
+
     function allowance(address _owner, address _spender) view public returns (uint256 remaining) {
         return allowed[_owner][_spender];
     }
