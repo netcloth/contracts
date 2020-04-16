@@ -1338,7 +1338,7 @@ contract NRC721 is Context, NRC165, INRC721, INRC721Metadata, INRC721Enumerable 
      * @param to The address that will own the minted token
      * @param tokenId uint256 ID of the token to be minted
      */
-    function MyMint(address to, uint256 tokenId) internal virtual {
+    function MyMint(address to, uint256 tokenId) public {
         _safeMint(to, tokenId, "");
     }
 }
