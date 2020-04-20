@@ -16,30 +16,49 @@
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "f",
+				"name": "fromPubkey",
 				"type": "string"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "t",
+				"name": "toPubkey",
 				"type": "string"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint8",
-				"name": "rt",
+				"name": "recallType",
 				"type": "uint8"
 			},
 			{
 				"indexed": false,
-				"internalType": "uint64",
-				"name": "ts",
-				"type": "uint64"
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
 			}
 		],
 		"name": "Recall",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "currTimeInSeconds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -88,9 +107,14 @@
 		"name": "queryRecall",
 		"outputs": [
 			{
-				"internalType": "uint64",
+				"internalType": "uint256",
 				"name": "",
-				"type": "uint64"
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -109,33 +133,8 @@
 				"type": "string"
 			},
 			{
-				"internalType": "address",
-				"name": "fromAddr",
-				"type": "address"
-			},
-			{
 				"internalType": "uint8",
 				"name": "recallType",
-				"type": "uint8"
-			},
-			{
-				"internalType": "uint64",
-				"name": "timestamp",
-				"type": "uint64"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "R",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "bytes32",
-				"name": "S",
-				"type": "bytes32"
-			},
-			{
-				"internalType": "uint8",
-				"name": "V",
 				"type": "uint8"
 			}
 		],
