@@ -1,10 +1,10 @@
 pragma solidity 0.6.0;
 
 contract ChatRecall {
-    event Recall(string fromPubkey, string toPubkey, uint8 recallType, uint64 timestamp, address from);
+    event Recall(string fromPubkey, string toPubkey, uint8 recallType, uint256 timestamp, address from);
     
     struct st {
-       uint64 timestamp;
+       uint256 timestamp;
        address addr;
     }
 
@@ -22,9 +22,15 @@ contract ChatRecall {
         fee = _fee;
     }
 
-    function recall(string memory fromPubkey, string memory toPubkey, uint8 recallType, uint64 timestamp) public payable {
+    function currTimeInSeconds() public view returns (uint256) {
+        return now;
+    }
+
+    function recall(string memory fromPubkey, string memory toPubkey, uint8 recallType) public payable {
         require(msg.value >= fee);
         
+        uint256 timestamp = currTimeInSeconds();
+
         if (Records[fromPubkey][toPubkey][recallType].timestamp < timestamp) {
             st memory s = st(timestamp, msg.sender);
             Records[fromPubkey][toPubkey][recallType] = s;
@@ -33,7 +39,7 @@ contract ChatRecall {
         emit Recall(fromPubkey, toPubkey, recallType, timestamp, msg.sender);
     }
     
-    function queryRecall(string memory fromPubkey, string memory toPubkey, uint8 recallType) public view returns (uint64, address) {
+    function queryRecall(string memory fromPubkey, string memory toPubkey, uint8 recallType) public view returns (uint256, address) {
         return (Records[fromPubkey][toPubkey][recallType].timestamp, Records[fromPubkey][toPubkey][recallType].addr);
     }
 
