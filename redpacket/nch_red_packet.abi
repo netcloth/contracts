@@ -1,0 +1,148 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "receiver",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Receive",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "Send",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "word",
+				"type": "bytes32"
+			},
+			{
+				"internalType": "bool",
+				"name": "equalDivision",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "expireHeight",
+				"type": "uint256"
+			}
+		],
+		"name": "create",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "word",
+				"type": "bytes32"
+			}
+		],
+		"name": "getRecord",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "equalDivision",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "remainAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "size",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "remainSize",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "height",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "expiredHeight",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "word",
+				"type": "bytes32"
+			}
+		],
+		"name": "open",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes32",
+				"name": "word",
+				"type": "bytes32"
+			}
+		],
+		"name": "revoke",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
