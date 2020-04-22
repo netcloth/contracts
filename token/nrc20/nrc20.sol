@@ -30,6 +30,10 @@ contract SafeMath {
     }
 }
 
+
+
+
+
 contract StandardToken is SafeMath  {
     string public name;
     string public symbol;
@@ -57,31 +61,40 @@ contract StandardToken is SafeMath  {
         symbol = _symbol;
     }
 
+    /**
+     * @dev Returns true if `account` is a contract.
+     */
+    function isContract(address account) internal view returns (bool) {
+        bytes32 codehash;
+        assembly { codehash := extcodehash(account) }
+        return (codehash != 0x0);
+    }
+    
     function balanceOf(address _owner) view public returns (uint256 balance) {
         return balances[_owner];
     }
 
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        if (balances[msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
-            balances[msg.sender] = SafeMath.safeSub(balances[msg.sender], _value);
-            balances[_to] = SafeMath.safeAdd(balances[_to], _value);
-            emit Transfer(msg.sender, _to, _value);
-            return true;
-        } else {
-            return false;
-        }
+    function transfer(address _to, uint256 _value) public {
+        require(!isContract(_to), "Can't transfer to contract");
+        require(balances[msg.sender] >= _value, "Insuffient balance");
+        require(balances[_to] + _value > balances[_to], "Overflow");
+
+        balances[msg.sender] = SafeMath.safeSub(balances[msg.sender], _value);
+        balances[_to] = SafeMath.safeAdd(balances[_to], _value);
+        emit Transfer(msg.sender, _to, _value);
+      
     }
 
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
-        if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
-            balances[_to] += _value;
-            balances[_from] -= _value;
-            allowed[_from][msg.sender] -= _value;
-            emit Transfer(_from, _to, _value);
-            return true;
-        } else {
-            return false;
-        }
+        require (balances[_from] >= _value, "Insuffient balance");
+        require (allowed[_from][msg.sender] >= _value, "Insuffient allowance");
+        require (balances[_to] + _value > balances[_to], "Overflows");
+
+        balances[_to] = SafeMath.safeAdd(balances[_to] ,_value);
+        balances[_from] = SafeMath.safeSub(balances[_from], _value);
+        allowed[_from][msg.sender] = SafeMath.safeSub(allowed[_from][msg.sender], _value);
+        emit Transfer(_from, _to, _value);
+      
     }
 
     function approve(address _spender, uint256 _value) public returns (bool success) {
