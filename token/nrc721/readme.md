@@ -9,8 +9,7 @@
 ```javascript
 pragma solidity ^0.4.20;
 
-///  Note: NRC-165 接口id 为 0x80ac58cd.
-interface NRC721 /* is NRC165 */ {
+interface NRC721 {
     /// @dev 当任何NFT的所有权更改时（不管哪种方式），就会触发此事件。
     ///  包括在创建时（`from` == 0）和销毁时(`to` == 0), 合约创建时除外。
     event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);
@@ -38,7 +37,7 @@ interface NRC721 /* is NRC165 */ {
     /// @notice 将NFT的所有权从一个地址转移到另一个地址
     /// @dev 如果`msg.sender` 不是当前的所有者（或授权者）抛出异常
     /// 如果 `_from` 不是所有者、`_to` 是零地址、`_tokenId` 不是有效id 均抛出异常。
-    ///  当转移完成时，函数检查  `_to` 是否是合约，如果是，调用 `_to`的 `onNRC721Received` 并且检查返回值是否是 `0x150b7a02` (即：`bytes4(keccak256("onNRC721Received(address,address,uint256,bytes)"))`)  如果不是抛出异常。
+    /// 暂不支持`_to` 为合约地址，如果`_to` 为合约地址，则抛出异常
     /// @param _from ：当前的所有者
     /// @param _to ：新的所有者
     /// @param _tokenId ：要转移的token id.
@@ -51,6 +50,7 @@ interface NRC721 /* is NRC165 */ {
     /// @notice 转移所有权 -- 调用者负责确认`_to`是否有能力接收NFTs，否则可能永久丢失。
     /// @dev 如果`msg.sender` 不是当前的所有者（或授权者、操作员）抛出异常
     /// 如果 `_from` 不是所有者、`_to` 是零地址、`_tokenId` 不是有效id 均抛出异常。
+    /// 暂不支持`_to` 为合约地址，如果`_to` 为合约地址，则抛出异常
     function transferFrom(address _from, address _to, uint256 _tokenId) external payable;
 
     /// @notice 更改或确认NFT的授权地址
@@ -76,31 +76,5 @@ interface NRC721 /* is NRC165 */ {
     /// @param _owner 所有者
     /// @param _operator 代表所有者的授权操作员
     function isApprovedForAll(address _owner, address _operator) external view returns (bool);
-}
-
-interface NRC165 {
-    /// @notice 是否合约实现了接口
-    /// @param interfaceID  NRC-165定义的接口id
-    /// @dev 函数要少于  30,000 gas.
-    /// @return 合约实现了 `interfaceID`（不为  0xffffffff）返回`true` ， 否则false.
-    function supportsInterface(bytes4 interfaceID) external view returns (bool);
-}
-```
-
-如果合约（应用）要接受NFT的安全转账，则必须实现以下接口。
-
-```javascript
-/// @dev 按 NRC-165 标准，接口id为 0x150b7a02.
-interface NRC721TokenReceiver {
-    /// @notice 处理接收NFT
-    /// @dev NRC721智能合约在`transfer`完成后，在接收这地址上调用这个函数。
-    /// 函数可以通过revert 拒绝接收。返回非`0x150b7a02` 也同样是拒绝接收。
-    /// 注意: 调用这个函数的 msg.sender是NRC721的合约地址
-    /// @param _operator ：调用 `safeTransferFrom` 函数的地址。
-    /// @param _from ：之前的NFT拥有者
-    /// @param _tokenId ： NFT token id
-    /// @param _data ： 附加信息
-    /// @return 正确处理时返回 `bytes4(keccak256("onNRC721Received(address,address,uint256,bytes)"))`
-    function onNRC721Received(address _operator, address _from, uint256 _tokenId, bytes _data) external returns(bytes4);
 }
 ```
