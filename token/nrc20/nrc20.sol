@@ -30,10 +30,6 @@ contract SafeMath {
     }
 }
 
-
-
-
-
 contract StandardToken is SafeMath  {
     string public name;
     string public symbol;
@@ -85,7 +81,7 @@ contract StandardToken is SafeMath  {
       
     }
 
-    function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
+    function transferFrom(address _from, address _to, uint256 _value) public {
         require (balances[_from] >= _value, "Insuffient balance");
         require (allowed[_from][msg.sender] >= _value, "Insuffient allowance");
         require (balances[_to] + _value > balances[_to], "Overflows");
