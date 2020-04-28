@@ -99,8 +99,8 @@ function beneficiaryWithdraw() public virtual
 ### 合约创建
 创建者通过构造函数传入收益人地址beneficiary，创建合约
 
-### 调用depositOf存款
-调用depositOf方法向合约存款，并指定收款人
+### 调用deposit存款
+调用deposit方法向合约存款，并指定收款人
 
 ### 合约owner设置合约状态
 合约状态可设置为2种：
