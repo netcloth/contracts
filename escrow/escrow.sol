@@ -4,7 +4,7 @@ import "../math/SafeMath.sol";
 import "../Ownable.sol";
 import "../utils/Address.sol";
 
-contract Escrow is Ownable{
+contract Escrow is Ownable {
     using SafeMath for uint256;
     using Address for address payable;
 
@@ -21,7 +21,7 @@ contract Escrow is Ownable{
      * @dev Stores the sent amount as credit to be withdrawn.
      * @param payee The destination address of the funds.
      */
-    function deposit(address payee) public virtual payable onlyOwner {
+    function deposit(address payee) public virtual payable {
         uint256 amount = msg.value;
         _deposits[payee] = _deposits[payee].add(amount);
 
@@ -38,7 +38,7 @@ contract Escrow is Ownable{
      *
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    function withdraw(address payable payee) public virtual onlyOwner {
+    function withdraw(address payable payee) public virtual {
         uint256 payment = _deposits[payee];
 
         _deposits[payee] = 0;
