@@ -38,7 +38,7 @@ contract Escrow is Ownable {
      *
      * @param payee The address whose funds will be withdrawn and transferred to.
      */
-    function withdraw(address payable payee) public virtual {
+    function withdraw(address payable payee) public virtual onlyOwner{
         uint256 payment = _deposits[payee];
 
         _deposits[payee] = 0;
