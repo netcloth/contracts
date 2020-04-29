@@ -4,6 +4,9 @@
 
 ## 接口
 
+### constructor
+构造函数，传入佣金地址
+
 ### setFeeRate
 
 设置交易费率，对单笔交易按交易额抽成，默认为万分之1。
@@ -25,6 +28,12 @@ function setFeeRate(uint256 _feeRate) public
 // expireTimeSec 失效时间，单位为秒
 // R,S,V 为收款人对上述字段的签名，合约内会验证，防篡改
 function payAndStore(address payable _payee, uint256 _orderId, bytes32 _hash, uint256 expireTimeSec,  bytes32 R, bytes32 S, uint8 V) public payable
+```
+
+调用成功，触发事件
+
+```javascript
+event Transfer(address _from, address _to, uint256 _value);
 ```
 
 ### withdraw
