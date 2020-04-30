@@ -19,9 +19,9 @@ library Address {
      * ====
      */
     function isContract(address account) internal view returns (bool) {
-        bytes32 codehash;
-        assembly { codehash := extcodehash(account) }
-        return (codehash != 0x0);
+        uint256 size;
+        assembly { size := extcodesize(account) }
+        return size > 0;
     }
 
     /**
