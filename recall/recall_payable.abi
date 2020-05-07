@@ -33,9 +33,9 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "uint64",
+				"internalType": "uint256",
 				"name": "timestamp",
-				"type": "uint64"
+				"type": "uint256"
 			},
 			{
 				"indexed": false,
@@ -46,6 +46,19 @@
 		],
 		"name": "Recall",
 		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "currTimeInSeconds",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -94,9 +107,9 @@
 		"name": "queryRecall",
 		"outputs": [
 			{
-				"internalType": "uint64",
+				"internalType": "uint256",
 				"name": "",
-				"type": "uint64"
+				"type": "uint256"
 			},
 			{
 				"internalType": "address",
@@ -123,11 +136,6 @@
 				"internalType": "uint8",
 				"name": "recallType",
 				"type": "uint8"
-			},
-			{
-				"internalType": "uint64",
-				"name": "timestamp",
-				"type": "uint64"
 			}
 		],
 		"name": "recall",
