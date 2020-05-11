@@ -1,0 +1,38 @@
+{
+  "tx": {
+    "msg": [
+      {
+        "type": "nch/MsgSend",
+        "value": {
+          "from_address": "nch17ys628ew3t0z4w4yxqhszkpcqakv2rfq25hrl6",
+          "to_address": "nch1nzrujkx6ntvqz9hqurehtduzt74c6aunyphml7",
+          "amount": [
+            {
+              "denom": "pnch",
+              "amount": "30000000000"
+            }
+          ]
+        }
+      }
+    ],
+    "fee": {
+      "amount": [
+        {
+          "denom": "pnch",
+          "amount": "200000000"
+        }
+      ],
+      "gas": "200000"
+    },
+    "signatures": [
+      {
+        "pub_key": {
+          "type": "tendermint/PubKeySecp256k1",
+          "value": "AgmCOSX+u2E1CSSHX5Gzyz7h9bOZlTLgPWxInDfEx9F6"
+        },
+        "signature": "jjMgYZTGnJ5mh/XCTzLhwEScea0yb05irUDXdMrPbjRTTnPCjasj3K7kdnnRtO31tVItDQP8uF+NCYJcwKCJ1g=="
+      }
+    ],
+    "memo": ""
+  },"mode":"sync"
+}
