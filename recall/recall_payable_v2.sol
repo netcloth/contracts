@@ -28,6 +28,9 @@ contract ChatRecall {
 
     function recall(string memory fromPubkey, string memory toPubkey, uint8 recallType) public payable {
         require(msg.value >= fee);
+        if(msg.value > fee) {
+            msg.sender.transfer(msg.value - fee);
+        }
         
         uint256 timestamp = currTimeInSeconds();
 
