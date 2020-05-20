@@ -12,19 +12,18 @@ contract RedPacket {
     );
 
     address payable owner ;
-    bool equalDivision;
+    bool public equalDivision;
     bytes32 internal word;
-    uint256 size;
-    uint256 remainSize;
-    uint256 expiredHeight;
-    
+    uint256 public size;
+    uint256 public remainSize;
+
     mapping(address => bool) grabbed;
-    
+
     // Giving gives out NCH.
     constructor(
-        bytes32 _word, 
-        bool _equalDivision, 
-        uint256 _size 
+        bytes32 _word,
+        bool _equalDivision,
+        uint256 _size
     ) public payable {
         //创建红包
         require(_size > 0 && msg.value > 0 && msg.value > _size, "invalid data provided");
@@ -41,9 +40,9 @@ contract RedPacket {
 
         emit Send(msg.sender, msg.value);
     }
-    
+
     function kill() public  {
-        require(msg.sender == owner, "You're not the owner");        
+        require(msg.sender == owner, "You're not the owner");
         selfdestruct(owner);
     }
 
@@ -82,8 +81,7 @@ contract RedPacket {
             grabbed[msg.sender] = true;
             msg.sender.transfer(value);
         }
-        
+
         emit Receive(msg.sender, value);
     }
 }
-
