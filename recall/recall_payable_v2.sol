@@ -48,7 +48,7 @@ contract ChatRecall {
 
     // transfer balance to owner
 	function withdraw(uint256 amount) public {
-		require (msg.sender != owner);
+		assert (msg.sender == owner);
 		owner.transfer(amount);
 	}
 }
