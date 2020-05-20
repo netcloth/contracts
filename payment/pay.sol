@@ -6,6 +6,8 @@ contract Pay {
     
     using SafeMath for uint256;
     
+    event Transfer(address _from, address _to, uint256 _value, uint256 _actual_value);
+    
     uint256 public E4 = uint256(10000);
     uint256 public feeRateE4;
     address payable public owner;
@@ -35,6 +37,7 @@ contract Pay {
         uint256 commission = calcCommission(msg.value);
         uint256 valueToSendout = msg.value - commission;
         to.transfer(valueToSendout);
+        emit Transfer(msg.sender, to, msg.value, valueToSendout);
     }
     
 	function withdraw(uint256 amount) public {
